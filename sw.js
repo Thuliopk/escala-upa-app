@@ -1,7 +1,11 @@
-self.addEventListener('install', function(e) {
+self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-self.addEventListener('fetch', function(event) {
-  // não precisa cache agora
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (event) => {
+  // só intercepta, não precisa cache ainda
 });
