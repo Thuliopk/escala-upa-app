@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Escala UPA</title>
+<meta charset="UTF-8">
+<title>Escala UPA</title>
 
-  <meta name="theme-color" content="#3478f6">
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#3478f6">
 
+<!-- Mobile -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- Ícone -->
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747310.png">
+<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/747/747310.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body style="margin:0;background:#07111f;display:flex;align-items:center;justify-content:center;height:100vh;color:white;font-family:sans-serif;">
+  <h2>Carregando Escala...</h2>
 
-  <div>
-    <h2>Carregando Escala...</h2>
-  </div>
-
-  <script>
-    window.location.href = "https://script.google.com/macros/s/AKfycbwXyIUGCiBAx1XDzjdKf-I4uUKyNbA7UMReVmt0zaQQhywU4XOdkA2dMhbI8ZO1N0I/exec?app=escala";
-  </script>
+<script>
+setTimeout(() => {
+  window.location.href = "https://script.google.com/macros/s/AKfycbwXyIUGCiBAx1XDzjdKf-I4uUKyNbA7UMReVmt0zaQQhywU4XOdkA2dMhbI8ZO1N0I/exec?app=escala";
+}, 500);
+</script>
 
 </body>
 </html>
