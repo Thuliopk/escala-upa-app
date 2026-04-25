@@ -13,8 +13,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 
 <!-- Ícone -->
-<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/747/747310.png">
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/747/747310.png">
+<link rel="icon" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -23,9 +23,13 @@
   <h2>Carregando Escala...</h2>
 
 <script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+
 setTimeout(() => {
   window.location.href = "https://script.google.com/macros/s/AKfycbwXyIUGCiBAx1XDzjdKf-I4uUKyNbA7UMReVmt0zaQQhywU4XOdkA2dMhbI8ZO1N0I/exec?app=escala";
-}, 500);
+}, 3000);
 </script>
 
 </body>
