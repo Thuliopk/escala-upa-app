@@ -4,32 +4,44 @@
 <meta charset="UTF-8">
 <title>Escala UPA</title>
 
-<!-- PWA -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#3478f6">
-
-<!-- Mobile -->
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-
-<!-- Ícone -->
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="margin:0;background:#07111f;display:flex;align-items:center;justify-content:center;height:100vh;color:white;font-family:sans-serif;">
-  <h2>Carregando Escala...</h2>
+<body style="margin:0;background:#07111f;color:white;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;">
+
+  <div>
+    <img src="icon-192.png" style="width:96px;border-radius:24px;margin-bottom:16px;">
+    <h2>Escala UPA</h2>
+    <p style="color:#a8b8d3;">Sistema de escala mensal</p>
+
+    <button onclick="abrirEscala()" style="padding:14px 22px;border:0;border-radius:14px;background:#3478f6;color:white;font-weight:bold;font-size:16px;margin-top:12px;">
+      Abrir escala
+    </button>
+  </div>
 
 <script>
+const LINK_ESCALA = "https://script.google.com/macros/s/AKfycbwXyIUGCiBAx1XDzjdKf-I4uUKyNbA7UMReVmt0zaQQhywU4XOdkA2dMhbI8ZO1N0I/exec?app=escala";
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js');
 }
 
-setTimeout(() => {
-  window.location.href = "https://script.google.com/macros/s/AKfycbwXyIUGCiBAx1XDzjdKf-I4uUKyNbA7UMReVmt0zaQQhywU4XOdkA2dMhbI8ZO1N0I/exec?app=escala";
-}, 3000);
+function abrirEscala() {
+  window.location.href = LINK_ESCALA;
+}
+
+// Se já estiver instalado como app, abre direto a escala
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  setTimeout(() => {
+    window.location.href = LINK_ESCALA;
+  }, 800);
+}
 </script>
 
 </body>
