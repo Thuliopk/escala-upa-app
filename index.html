@@ -12,6 +12,8 @@
 
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Escala UPA 24H" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <link rel="icon" href="icon-512.png" type="image/png" />
   <link rel="apple-touch-icon" href="icon-512.png" />
@@ -438,6 +440,16 @@
 
     let deferredPrompt = null;
 
+    const isIOS =
+      /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+
+    const btnInstall = document.getElementById("btnInstall");
+
     function abrirEscala() {
       window.location.href = LINK_ESCALA;
     }
@@ -449,20 +461,32 @@
 
       setTimeout(() => {
         toast.classList.remove("show");
-      }, 2800);
+      }, 5200);
+    }
+
+    if (isIOS && !isStandalone) {
+      btnInstall.style.display = "flex";
+      btnInstall.innerHTML = "🍎 Instalar no iPhone";
     }
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
       deferredPrompt = event;
 
-      const btnInstall = document.getElementById("btnInstall");
-      btnInstall.style.display = "flex";
+      if (!isStandalone) {
+        btnInstall.style.display = "flex";
+        btnInstall.innerHTML = "📲 Instalar aplicativo";
+      }
     });
 
-    document.getElementById("btnInstall").addEventListener("click", async () => {
+    btnInstall.addEventListener("click", async () => {
+      if (isIOS) {
+        showToast("No iPhone: abra pelo Safari, toque no botão Compartilhar e escolha “Adicionar à Tela de Início”. Depois abra pelo ícone criado.");
+        return;
+      }
+
       if (!deferredPrompt) {
-        showToast("No celular, toque nos três pontinhos do navegador e escolha Instalar app.");
+        showToast("No Android: toque nos três pontinhos do navegador e escolha “Instalar app” ou “Adicionar à tela inicial”.");
         return;
       }
 
@@ -470,7 +494,7 @@
       await deferredPrompt.userChoice;
       deferredPrompt = null;
 
-      document.getElementById("btnInstall").style.display = "none";
+      btnInstall.style.display = "none";
     });
 
     document.getElementById("btnCopy").addEventListener("click", async () => {
